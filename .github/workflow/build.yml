@@ -39,4 +39,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: executable
-        path: build/your_executable_name
+        path: build/3DConstructer # Upload the executable file

@@ -156,8 +156,7 @@ const char* CountFixedSet<T, N>::CountFixedSetException::what() const noexcept {
 【开发者及日期】   李想 2024/8/3
 【更改记录】       （若有修改，则必需注明）
 *************************************************************************/
-template <typename T, size_t N> 
-CountFixedSet<T, N>::CountFixedSet
+template <typename T, size_t N> CountFixedSet<T, N>::CountFixedSet
 (std::initializer_list<T> init) : m_ullCount(0){
     if (init.size() > N) {
         throw CountFixedSetException("Too many elements in init list.");

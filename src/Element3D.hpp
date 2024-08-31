@@ -49,16 +49,14 @@
                         void ModifyPoints(std::initializer_list<Point3D> init);
                     
                     Getters:
-                    点个数的常引用
-                        const size_t PointCount { N };
                     对受保护成员变量m_Points的常引用
                         const CountFixedSet<Point3D, N>& Points { m_Points };
                     获取点的个数 size_t GetPointCount() const;
                     获取点的位置 const Point3D& GetPoint(size_t Index) const;
                     获取点集 const CountFixedSet<Point3D, N>& GetPoints() const;
-                    (虚函数）获取元素周长/长度 virtual double GetLength() const = 0;
-                    (虚函数）获取元素面积 virtual double GetArea() const = 0;
-                    (虚函数）获取元素法向量 virtual Vector3D Normal() const = 0;
+                    虚 获取元素周长/长度 virtual double GetLength() const = 0;
+                    虚 获取元素面积 virtual double GetArea() const = 0;
+                    虚 获取元素法向量 virtual Vector3D Normal() const = 0;
                     检查有无重复点 bool HasRepeatedPoints() const;
                     重载==运算符 bool operator==(const Element3D& Other) const;
                     重载!=运算符 bool operator!=(const Element3D& Other) const;

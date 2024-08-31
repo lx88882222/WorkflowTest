@@ -81,17 +81,32 @@ public:
     //static-setters
     //------------------------------------------------------------------
     //检查文件扩展名是否匹配
-    static void CheckFileExtension(
-        const std::string& FileName,
-        const std::string& FileExt);
+    static void CheckFileExtension
+    (const std::string& FileName, const std::string& FileExt){
+        if (FileName.substr(FileName.find_last_of('.') + 1) != FileExt) {
+            throw INVALID_FILE_EXTENSION(FileExt);
+        }
+    }
     //检查文件是否打开成功
-    static void CheckFileOpen(const std::ifstream& File);
+    static void CheckFileOpen(const std::ifstream& File){
+        if (!File.is_open()) {
+            throw FILE_OPEN_FAILED("File");
+        }
+    }
     //获取指定文件的扩展名
-    static std::string GetFileExtension(const std::string& FileName);
+    static std::string GetFileExtension(const std::string& FileName) {
+        return FileName.substr(FileName.find_last_of('.') + 1);
+    }
     //获取文件名
-    static std::string GetFileName(const std::string& FileName);
+    static std::string GetFileName(const std::string& FileName){
+        return FileName.substr(0, FileName.find_last_of('.'));
+    }
     //获取文件大小
-    static std::streampos GetFileSize(const std::string& FileName);
+    static std::streampos GetFileSize(const std::string& FileName) {
+        std::ifstream File(FileName, std::ios::binary | std::ios::ate);
+        CheckFileOpen(File);
+        return File.tellg();
+    }
 
 protected:
     //------------------------------------------------------------------
@@ -108,76 +123,3 @@ protected:
 };
 
 #endif // FILEPORTER_HPP
-
-// FilePorter类的实现
-/*************************************************************************
-【函数名称】       CheckFileExtension
-【函数功能】        检查文件扩展名是否匹配
-【参数】            std::string FileName, std::string FileExt
-【返回值】         无
-【开发者及日期】   李想 2024/8/3
-【更改记录】       （若有修改，则必需注明）
-*************************************************************************/
-template<FilePorterType ENUM>
-void FilePorter<ENUM>::CheckFileExtension
-(const std::string& FileName, const std::string& FileExt){
-    if (FileName.substr(FileName.find_last_of('.') + 1) != FileExt) {
-        throw INVALID_FILE_EXTENSION(FileExt);
-    }
-}
-
-/*************************************************************************
-【函数名称】       CheckFileOpen
-【函数功能】        检查文件是否打开成功
-【参数】        std::ifstream File
-【返回值】         无
-【开发者及日期】   李想 2024/8/3
-【更改记录】       （若有修改，则必需注明）
-*************************************************************************/
-template<FilePorterType ENUM>
-void FilePorter<ENUM>::CheckFileOpen(const std::ifstream& File){
-    if (!File.is_open()) {
-        throw FILE_OPEN_FAILED("File");
-    }
-}
-
-/*************************************************************************
-【函数名称】       GetFileExtension
-【函数功能】        获取指定文件的扩展名
-【参数】            std::string FileName
-【返回值】         std::string
-【开发者及日期】   李想 2024/8/3
-【更改记录】       （若有修改，则必需注明）
-*************************************************************************/
-template<FilePorterType ENUM>
-std::string FilePorter<ENUM>::GetFileExtension(const std::string& FileName){
-    return FileName.substr(FileName.find_last_of('.') + 1);
-}
-
-/*************************************************************************
-【函数名称】       GetFileName
-【函数功能】        获取文件名
-【参数】            std::string FileName
-【返回值】         std::string
-【开发者及日期】   李想 2024/8/3
-【更改记录】       （若有修改，则必需注明）
-*************************************************************************/
-template<FilePorterType ENUM>
-std::string FilePorter<ENUM>::GetFileName(const std::string& FileName){
-    return FileName.substr(0, FileName.find_last_of('.'));
-}
-
-/*************************************************************************
-【函数名称】       GetFileSize
-【函数功能】        获取文件大小
-【参数】            std::string FileName
-【返回值】         std::streampos
-【开发者及日期】   李想 2024/8/3
-【更改记录】       （若有修改，则必需注明）
-*************************************************************************/
-template<FilePorterType ENUM>
-std::streampos FilePorter<ENUM>::GetFileSize(const std::string& FileName){
-    std::ifstream File(FileName, std::ios::binary | std::ios::ate);
-    CheckFileOpen(File);
-    return File.tellg();
-}

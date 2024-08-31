@@ -18,3 +18,8 @@ add_executable(3DConstructer ${SOURCES})
 # 包含头文件目录
 # 假设你的头文件在 src 目录下
 include_directories(src)
+
+# 设置输出目录
+set_target_properties(3DConstructer PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build
+)

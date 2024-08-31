@@ -10,13 +10,8 @@ jobs:
     - name: Checkout repository # Checkout the repository to the runner 检出存储库到runner
       uses: actions/checkout@v2 #使用actions/checkout@v2
 
-    - name: Set up C++ environment # Set up the C++ compiler environment
-      uses: actions/setup-cpp@v1
-      with:
-        compiler: gcc # Use the latest version of GCC
-
     - name: Install dependencies
-      run: sudo apt-get install -y build-essential # Install the build-essential package
+      run: sudo apt-get install -y build-essential cmake # Install the build-essential and cmake packages
 
     - name: Build the project # Build the project using CMake
       run: |

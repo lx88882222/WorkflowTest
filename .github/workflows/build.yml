@@ -5,9 +5,6 @@ on: [push] # Trigger the workflow on push event 每次提交时，编译源代�
 jobs:
   build:
     runs-on: ubuntu-latest # Use the latest version of Ubuntu
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }} # Set the working directory to the repository root
     steps:
     - name: Checkout repository # Checkout the repository to the runner 检出存储库到runner
       uses: actions/checkout@v2 #使用actions/checkout@v2
@@ -26,4 +23,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: executable
-        path: build/3DConstructer # Upload the executable file
+        path: build # Upload the executable file
